@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+    <TextView
+        android:id="@+id/textview_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:text="~"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/from"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/genBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/from" />
+
+    <LinearLayout
+        android:id="@+id/from"
+        android:layout_width="150dp"
+        android:layout_height="81dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/to"
+        app:layout_constraintTop_toBottomOf="@id/textview_first"
+        app:layout_constraintBottom_toTopOf="@id/genBtn" >
+
+        <TextView
+            android:id="@+id/fromText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+
+        <SeekBar
+            android:id="@+id/fromSelect"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:max="100"
+            android:min="0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/to"
+        android:layout_width="150dp"
+        android:layout_height="81dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="@id/from"
+        app:layout_constraintBottom_toBottomOf="@id/from"
+        app:layout_constraintStart_toEndOf="@id/from"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/toText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+
+        <SeekBar
+            android:id="@+id/toSelect"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:max="100"
+            android:min="0" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
