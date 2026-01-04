@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.slider.Slider
+import com.google.android.material.slider.RangeSlider
 import se.payerl.biguglyrandomgenerator.databinding.FragmentFirstBinding
 import kotlin.random.Random
 
@@ -35,13 +33,19 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        setupSlider(binding.fromSelect, binding.fromText, "From: ") { value ->
-            fromVal = value.toInt()
+        // Setup RangeSlider
+        binding.rangeSlider.addOnChangeListener { slider, _, fromUser ->
+            if (fromUser) {
+                val values = slider.values
+                fromVal = values[0].toInt()
+                toVal = values[1].toInt()
+            }
         }
-        
-        setupSlider(binding.toSelect, binding.toText, "To: ") { value ->
-            toVal = value.toInt()
-        }
+
+        // Initialize values from RangeSlider
+        val initialValues = binding.rangeSlider.values
+        fromVal = initialValues[0].toInt()
+        toVal = initialValues[1].toInt()
 
         binding.genBtn.setOnClickListener {
             val result = Random(System.currentTimeMillis().toInt()).nextInt(fromVal, toVal + 1)
@@ -49,15 +53,6 @@ class FirstFragment : Fragment() {
         }
     }
 
-    private fun setupSlider(slider: Slider, textView: TextView, prefix: String, onValueChanged: (Float) -> Unit) {
-        slider.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) {
-                onValueChanged(value)
-                textView.text = "$prefix${value.toInt()}"
-            }
-        }
-        textView.text = "$prefix${slider.value.toInt()}"
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
